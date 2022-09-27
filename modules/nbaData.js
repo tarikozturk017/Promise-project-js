@@ -78,6 +78,7 @@ module.exports.atlantaPlayers = function () {
       if (players.length === 0) {
         reject("No team found with this name: Atlanta Hawks");
       } else {
+        console.log(players);
         resolve(players);
       }
     }
