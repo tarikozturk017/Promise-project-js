@@ -91,14 +91,11 @@ module.exports.getTeamsByLocation = function (location) {
     if (location == null) {
       reject("No location provided");
     } else {
-      // console.log(location);
       for (team of dataCollection.teams) {
         if (team.location.toLowerCase() === location.toLowerCase()) {
-          // console.log(team);
           teams.push(team);
         }
       }
-      // console.log(teams.length);
       if (teams.length === 0) {
         reject("No team found in this location!");
       } else {
@@ -108,9 +105,19 @@ module.exports.getTeamsByLocation = function (location) {
   });
 };
 
-module.exports.getPlayerTeamByLastname = function (lastname) {
-  // TO CONTINUE
-  return new Promise((reject, resolve) => {
-    console.log(lastname);
+module.exports.getPlayersByLastName = function (surname) {
+  return new Promise((resolve, reject) => {
+    players = [];
+    for (player of dataCollection.players) {
+      if (surname.toLowerCase() === player.lastName.toLowerCase()) {
+        players.push(player);
+      }
+    }
+    console.log(players[0]);
+    if (players.length === 0) {
+      reject("No player found with this surnamesssss");
+    } else {
+      resolve(players);
+    }
   });
 };

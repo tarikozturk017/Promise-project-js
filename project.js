@@ -3,7 +3,7 @@ var nbaData = require("./modules/nbaData");
 // test inputs
 let team = "Toronto Raptors";
 let location = "Los Angeles";
-let lastname = "Achiuwa";
+let surname = "James";
 
 nbaData
   .initialize()
@@ -35,13 +35,13 @@ nbaData
     nbaData
       .getTeamsByLocation(location)
       .then(function (data) {
-        process.stdout.write(`The teams in ${location}: `);
+        process.stdout.write(`The team(s) in ${location}: `);
         for (let i = 0; i < data.length; i++) {
           process.stdout.write(`${data[i].teamName}`);
           if (i !== data.length - 1) {
             process.stdout.write(`, `);
           } else {
-            process.stdout.write(`.`);
+            console.log(`.`);
           }
         }
       })
@@ -49,10 +49,17 @@ nbaData
         console.log(reason);
       });
     nbaData
-      .getPlayerTeamByLastname(lastname)
+      .getPlayersByLastName(surname)
       .then(function (data) {
-        // TO CONTINUE
-        console.log(data);
+        process.stdout.write(`Player(s) with the ${surname} last name: `);
+        for (let i = 0; i < data.length; i++) {
+          process.stdout.write(`${data[i].firstName} ${data[i].lastName}`);
+          if (i !== data.length - 1) {
+            process.stdout.write(`, `);
+          } else {
+            console.log(`.`);
+          }
+        }
       })
       .catch(function (reason) {
         console.log(reason);
