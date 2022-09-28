@@ -57,18 +57,19 @@ module.exports.getAllTeams = function () {
   });
 };
 
-module.exports.atlantaPlayers = function () {
+module.exports.getTeamByName = function (teamName) {
   return new Promise((resolve, reject) => {
+    // console.log(teamName);
     players = [];
     let id = -1;
     // let len = dataCollection.players.length;
     for (team of dataCollection.teams) {
-      if (team.teamName.toLowerCase() === "atlanta hawks") {
+      if (team.teamName.toLowerCase() === teamName.toLowerCase()) {
         id = team.teamId;
       }
     }
     if (id === -1) {
-      reject("No team found with this name: Atlanta Hawks");
+      reject("No team found with this name");
     } else {
       for (player of dataCollection.players) {
         if (player.teamId === id) {
@@ -76,10 +77,40 @@ module.exports.atlantaPlayers = function () {
         }
       }
       if (players.length === 0) {
-        reject("No team found with this name: Atlanta Hawks");
+        reject("No team found with this name");
       } else {
         resolve(players);
       }
     }
+  });
+};
+
+module.exports.getTeamsByLocation = function (location) {
+  return new Promise((resolve, reject) => {
+    teams = [];
+    if (location == null) {
+      reject("No location provided");
+    } else {
+      // console.log(location);
+      for (team of dataCollection.teams) {
+        if (team.location.toLowerCase() === location.toLowerCase()) {
+          // console.log(team);
+          teams.push(team);
+        }
+      }
+      // console.log(teams.length);
+      if (teams.length === 0) {
+        reject("No team found in this location!");
+      } else {
+        resolve(teams);
+      }
+    }
+  });
+};
+
+module.exports.getPlayerTeamByLastname = function (lastname) {
+  // TO CONTINUE
+  return new Promise((reject, resolve) => {
+    console.log(lastname);
   });
 };
